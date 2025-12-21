@@ -3,6 +3,7 @@
  - Need local docker or podman
  - Download latest release,unzip and run the following command
 
+For **Docker**
 
 Run this one time to build the image
 ```bash 
@@ -12,6 +13,18 @@ docker build -t hippo-bpm .
 To run command run the following
 ```bash
 docker run -p 8080:8080 hippo-bpm
+```
+
+or **Podman**
+
+Run this one time to build the image
+```bash 
+podman build -t hippo-bpm .
+```
+
+To run command run the following
+```bash
+podman run -p 8080:8080 hippo-bpm
 ```
 
 Now application running in http://localhost:
