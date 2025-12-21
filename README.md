@@ -9,7 +9,7 @@ Run this one time to build the image
 docker build -t hippo-bpm .
 ```
 
-To run command run the follwing
+To run command run the following
 ```bash
 docker run -p 8080:8080 hippo-bpm
 ```
