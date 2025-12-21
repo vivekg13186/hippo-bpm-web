@@ -14,4 +14,7 @@ To run command run the following
 docker run -p 8080:8080 hippo-bpm
 ```
 
-Now application running in http://localhost:8080
+Now application running in http://localhost:
+
+![Homepage](/wiki/Accounts.PNG)
+![Appexplorer](/wiki/AppExplorer.PNG)
