@@ -31,7 +31,7 @@ const snapshotColumns = [
   { align: "left", name: 'ID', label: 'ID', field: 'ID', sortable: true },
   { align: "left", name: 'active', label: 'Active', field: 'active', sortable: true },
   { align: "left", name: 'branchName', label: 'Branch', field: 'branchName', sortable: true },
-
+  { align: 'left', name: 'actions', label: 'Action' }
 ];
 
 const loadEnvs = () => {
@@ -81,6 +81,7 @@ const viewSnapshot = (ss) => {
   }
 
 }
+
 </script>
 
 <template>
@@ -110,7 +111,54 @@ const viewSnapshot = (ss) => {
       </q-table>
     </PanelSection>
     <PanelSection title="Snapshots">
-      <q-table flat="" bordered="" :columns="snapshotColumns" :rows="snapshots"></q-table>
+      <q-table flat="" bordered="" :columns="snapshotColumns" :rows="snapshots">
+        <template v-slot:body-cell-active="props">
+          <q-td :props="props">
+            <q-badge color="primary" outline v-if="props.row.active">
+              Yes
+            </q-badge>
+            <q-badge color="warning" outline v-else>
+              No
+            </q-badge>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-actions="props">
+          <q-td :props="props">
+            <q-btn icon="more_vert" flat color="primary">
+              <q-menu>
+                <q-list style="min-width: 100px">
+                  <q-item clickable v-close-popup>
+                    <q-item-section>View toolkits</q-item-section>
+                  </q-item>
+                  <q-item clickable v-close-popup>
+                    <q-item-section>Activate</q-item-section>
+                  </q-item>
+
+                  <q-item clickable v-close-popup>
+                    <q-item-section>De Activate</q-item-section>
+                  </q-item>
+                  <q-item clickable v-close-popup>
+                    <q-item-section>Archive</q-item-section>
+                  </q-item>
+                  <q-item clickable v-close-popup>
+                    <q-item-section>Delete</q-item-section>
+                  </q-item>
+
+
+                </q-list>
+              </q-menu>
+            </q-btn>
+
+          </q-td>
+
+        </template>
+      </q-table>
+    </PanelSection>
+    <PanelSection title="Toolkits Dependencies">
+
+
+
+
     </PanelSection>
   </q-page>
 

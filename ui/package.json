@@ -26,6 +26,7 @@
     "simple-code-editor": "^2.1.0",
     "vue": "^3.5.22",
     "vue-i18n": "^11.0.0",
+    "vue-mermaid-string": "^8.0.1",
     "vue-router": "^4.0.0"
   },
   "devDependencies": {
