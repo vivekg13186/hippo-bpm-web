@@ -21,7 +21,7 @@ npm run build
 # Ensure static folder exists in server
 echo "Copying built UI to server static resources..."
 mkdir -p "../$SERVER_DIR/src/main/java/resources/static"
-cp -r dist/* "../$SERVER_DIR/src/main/java/resources/static"
+cp -r ./dist/spa/* "../$SERVER_DIR/src/main/java/resources/static"
 
 # -----------------------------
 # STEP 2: Build Server
