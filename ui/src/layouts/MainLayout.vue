@@ -15,7 +15,7 @@
 
           Hippo BPM</q-toolbar-title>
 
-        <div>v 0.1</div>
+        <div>v 0.3</div>
       </q-toolbar>
     </q-header>
 

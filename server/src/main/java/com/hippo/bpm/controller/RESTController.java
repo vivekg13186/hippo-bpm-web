@@ -1,6 +1,7 @@
 package com.hippo.bpm.controller;
 
 import com.hippo.bpm.baw.model.ExecuteServiceRequest;
+import com.hippo.bpm.baw.model.ViewSnapshotRequest;
 import com.hippo.bpm.model.Account;
 import com.hippo.bpm.model.TestServiceModel;
 import com.hippo.bpm.service.AccountService;
@@ -63,6 +64,7 @@ public class RESTController {
         return testService.getTestService(id);
     }
 
+
     @PostMapping("/apps")
     public  ResponseEntity<String>  getApps(@RequestBody Account account) {
         String result =  bawService.getApps(account);
@@ -87,6 +89,15 @@ public class RESTController {
 
         return new ResponseEntity<>(result, headers, HttpStatus.OK);
     }
+    @PostMapping("/snapshot")
+    public ResponseEntity<String> getSnapshotInfo(@RequestBody ViewSnapshotRequest input){
+        String result = bawService.getSnapshotInfo(input);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        return new ResponseEntity<>(result, headers, HttpStatus.OK);
+    }
+
     @PostMapping("/executeService")
     public ResponseEntity<String> executeService(@RequestBody ExecuteServiceRequest  serviceRequest) {
         String result =  bawService.executeService(serviceRequest.getAccount(),serviceRequest.getTestService());

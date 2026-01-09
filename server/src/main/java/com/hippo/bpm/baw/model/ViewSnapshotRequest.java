@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class ExecuteServiceRequest {
+public class ViewSnapshotRequest {
 
-    TestServiceModel testService;
+    String snapshotId;
     Account account;
 }

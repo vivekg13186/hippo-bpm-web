@@ -1,5 +1,6 @@
 package com.hippo.bpm.service;
 
+import com.hippo.bpm.baw.model.ViewSnapshotRequest;
 import com.hippo.bpm.model.Account;
 import com.hippo.bpm.model.TestServiceModel;
 import kong.unirest.core.ContentType;
@@ -9,6 +10,7 @@ import kong.unirest.core.UnirestInstance;
 import org.springframework.stereotype.Service;
 
 
+import javax.swing.text.View;
 import java.util.Base64;
 
 @Service
@@ -17,6 +19,8 @@ public class BAWService {
     public BAWService(){
 
         Unirest.config() .disableHostNameVerification(true)
+                .connectTimeout(300000)
+                .requestTimeout(300000)
                 .verifySsl(false);
 
     }
@@ -94,6 +98,32 @@ public String executeService(Account account,TestServiceModel testServiceModel){
                 .field("createTask","false")
                 .field("parts","all")
                 .field("params",testServiceModel.getInput())
+                .accept(ContentType.APPLICATION_JSON)
+                .basicAuth(account.getUsername(), account.getPassword())
+                .asString();
+    }
+    return result.getBody();
+
+}
+
+public String getSnapshotInfo(ViewSnapshotRequest viewSnapshotRequest){
+    HttpResponse<String> result;
+    Account account = viewSnapshotRequest.getAccount();
+    if(account.getType().equals("zen")) {
+        String base = account.getUsername()+":"+account.getPassword();
+        String code  = Base64.getEncoder().encodeToString(base.getBytes());
+        result = Unirest
+                .get(account.getUrl() + "/rest/bpm/wle/v1/processAppSettings")
+                .queryString("snapshotId",viewSnapshotRequest.getSnapshotId())
+                .queryString("recurse","true")
+                .accept(ContentType.APPLICATION_JSON)
+                .header("Authorization", "ZenApiKey " + code)
+                .asString();
+    }else{
+        result = Unirest
+                .get(account.getUrl() + "/rest/bpm/wle/v1/processAppSettings")
+                .queryString("snapshotId",viewSnapshotRequest.getSnapshotId())
+                .queryString("recurse","true")
                 .accept(ContentType.APPLICATION_JSON)
                 .basicAuth(account.getUsername(), account.getPassword())
                 .asString();
