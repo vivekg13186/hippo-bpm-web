@@ -6,29 +6,23 @@
  
 For **Docker**
 
-Run this one time to build the image
-```bash 
-docker build -t hippo-bpm .
-```
-
+ 
 To run command run the following
 ```bash
-docker run -d  -p 8080:8080  -v hippo-h2-data:/data --name hippo-bpm hippo-bpm
+cd app
+docker compose up -d --build
 ```
 
 or **Podman**
 
-Run this one time to build the image
-```bash 
-podman build -t hippo-bpm .
-```
-
 To run command run the following
-```bash
-podman run -d  -p 8080:8080  -v hippo-h2-data:/data --name hippo-bpm hippo-bpm
+```bash 
+cd app
+podman-compose up -d --build
 ```
+ 
 
-Now application running in http://localhost:
+Now application running in http://localhost:8080
 
 ![Homepage](/wiki/Accounts.PNG)
 ![Appexplorer](/wiki/AppExplorer.PNG)

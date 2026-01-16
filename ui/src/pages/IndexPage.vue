@@ -12,7 +12,7 @@ import { onMounted, ref } from 'vue';
 var help = ref(`
 
 # Welcome to Hippo BPM DevTools!
-V 0.3
+V 1.0
 
 ### Hippo DevTools is your all-in-one solution for developing, testing, and managing IBM BAW applications with ease.
 

@@ -3,6 +3,7 @@
 
 import { defineConfig } from '#q-app/wrappers'
 import { fileURLToPath } from 'node:url'
+import path from "node:path"
 
 export default defineConfig((ctx) => {
   return {
@@ -33,6 +34,8 @@ export default defineConfig((ctx) => {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#build
     build: {
+       distDir: path.resolve(__dirname, "../app/public"), // <- your target public folder
+      publicPath: "/",
       target: {
         browser: ['es2022', 'firefox115', 'chrome115', 'safari14'],
         node: 'node20',
