@@ -26,3 +26,14 @@ Now application running in http://localhost:8080
 
 ![Homepage](/wiki/Accounts.PNG)
 ![Appexplorer](/wiki/AppExplorer.PNG)
+
+
+## Build and run locally
+
+```bash 
+cd ui
+npm run build
+# copy file to app/public folder
+cd ../app
+npm run start
+```
