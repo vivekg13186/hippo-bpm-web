@@ -5,9 +5,10 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - hippo-bpm-data:/usr/src/app/database.sqlite
+      - hippo-bpm-data:/usr/src/app/hippo-database/
     environment:
       - NODE_ENV=production
+      - SQLITE_DB_PATH=/usr/src/app/hippo-database/hippo-bpm-web.db
 
 volumes:
   hippo-bpm-data:

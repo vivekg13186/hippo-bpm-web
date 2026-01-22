@@ -18,11 +18,11 @@
       </div>
     </PanelSection>
     <PanelSection title="Input JSON">
-      <CodeEditor :languages="[['json']]" v-model="input" theme="a11y-light" font-size="12px" :line-nums="true">
+      <CodeEditor :languages="[['json']]" v-model="input" theme="a11y-light" font-size="12px" :line-nums="true" style="width: 100%;">
       </CodeEditor>
     </PanelSection>
     <PanelSection title="Output JSON">
-      <CodeEditor :languages="[['json']]" v-model="output" theme="a11y-light" font-size="12px" :line-nums="true">
+      <CodeEditor :languages="[['json']]" v-model="output" theme="a11y-light" font-size="12px" :line-nums="true" style="width: 100%;">
       </CodeEditor>
     </PanelSection>
   </q-page>

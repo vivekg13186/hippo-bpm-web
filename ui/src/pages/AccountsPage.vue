@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page class="q-pa-md q-gutter-md">
     <q-ajax-bar ref="bar" position="top" size="10px" skip-hijack />
     <div class="q-pb-md q-gutter-sm">
       <q-breadcrumbs>

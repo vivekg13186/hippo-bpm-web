@@ -5,6 +5,7 @@ const sequelize = new Sequelize({
   storage: process.env["SQLITE_DB_PATH"] || "data/hippo-bpm-web.db",
 });
 
+console.log("Using SQLite DB at:", process.env["SQLITE_DB_PATH"] || "data/hippo-bpm-web.db");
 export const initDatabase = async () => {
   await sequelize.sync();
 };
