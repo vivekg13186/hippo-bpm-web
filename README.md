@@ -18,7 +18,7 @@ or **Podman**
 To run command run the following
 ```bash 
 cd app
-podman-compose up -d --build
+podman compose up
 ```
  
 
