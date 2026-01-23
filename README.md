@@ -1,7 +1,7 @@
 ## How to run the application
 
  - Need local docker or podman
- - Download latest release,unzip and run the following command
+ - clone the repo
  
  
 For **Docker**
@@ -18,6 +18,7 @@ or **Podman**
 To run command run the following
 ```bash 
 cd app
+podman compose build
 podman compose up
 ```
  
