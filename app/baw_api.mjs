@@ -34,20 +34,17 @@ function getAxiosConfig(account) {
 export async function getToolkits(account) {
   const config = getAxiosConfig(account);
 
-  const url =
-    account.type === "zen"
-      ? `${account.url}/rest/bpm/wle/v1/toolkit`
-      : `${account.url}/rest/bpm/wle/v1/processApps`;
+  const url = `${account.url}/rest/bpm/wle/v1/toolkit`;
 
   const response = await axios.get(url, config);
   return response.data;
 }
 export async function getInstance(account, instanceId) {
   const config = getAxiosConfig(account);
-
-  if (account.type === "zen") {
+  const url = `${account.url}/rest/bpm/wle/v1/process/${instanceId}`;
+  
     const response = await axios.get(
-      `${account.url}/rest/bpm/wle/v1/process/${instanceId}`,
+      url,
       {
         ...config,
         params: {
@@ -56,13 +53,8 @@ export async function getInstance(account, instanceId) {
       }
     );
     return response.data;
-  }
 
-  const response = await axios.get(
-    `${account.url}/rest/bpm/wle/v1/processApps`,
-    config
-  );
-  return response.data;
+ 
 }
 
 export async function executeService(account, testServiceModel) {
