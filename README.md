@@ -1,11 +1,16 @@
 ## How to run the application
 
- - Need local docker or podman
- - clone the repo
- 
- 
-For **Docker**
+Clone the repo
 
+## Run locally
+
+```bash 
+cd ../app
+npm run start
+```
+
+
+## Run in **Docker**
  
 To run command run the following
 ```bash

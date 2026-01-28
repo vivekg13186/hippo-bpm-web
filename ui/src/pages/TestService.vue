@@ -7,6 +7,17 @@
         <q-breadcrumbs-el label="Test Service" />
       </q-breadcrumbs>
     </div>
+    <PanelSection title="Import Test Service">
+      <CodeEditor :languages="[['json']]" v-model="input" theme="a11y-light" font-size="12px" :line-nums="true"
+        style="width: 100%;">
+      </CodeEditor>
+      <br />
+      <div class="q-gutter-md">
+        <q-btn type="format" label="format" unelevated color="primary" @click="formatJson"></q-btn>
+        <q-btn type="import" label="import" unelevated color="primary" @click="importTest"></q-btn>
+      </div>
+
+    </PanelSection>
     <PanelSection title="Test Service">
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
         <q-input filled v-model="title" label="Title" lazy-rules
@@ -18,16 +29,7 @@
         <q-btn type="submit" label="submit" unelevated color="primary"></q-btn>
       </q-form>
     </PanelSection>
-    <PanelSection title="Import Test Service">
-      <CodeEditor :languages="[['json']]" v-model="input" theme="a11y-light" font-size="12px" :line-nums="true" style="width: 100%;">
-      </CodeEditor>
-      <br/>
-      <div class="q-gutter-md">
-<q-btn type="format" label="format" unelevated color="primary" @click="formatJson"></q-btn>
-       <q-btn type="import" label="import" unelevated color="primary" @click="importTest"></q-btn>
-      </div>
 
-    </PanelSection>
 
 
     <div class="p-ma-md">&nbsp;</div>
@@ -56,6 +58,7 @@ const title = ref("")
 const appName = ref("")
 const serviceName = ref("")
 const input = ref(`
+
   [ {
       "title": "Test case 1",
       "appName": "App acronym",
@@ -141,7 +144,7 @@ const onSubmit = () => {
       title: title.value,
       appName: appName.value,
       serviceName: serviceName.value,
-      input: input.value
+      input: "{}"
     }
   }).then((data) => {
     console.log(data);
