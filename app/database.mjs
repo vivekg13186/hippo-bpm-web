@@ -65,7 +65,7 @@ const TestServiceModel = sequelize.define("TestServiceModel", {
   },
 
   input: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 });
@@ -96,16 +96,18 @@ export async function insertTestService(data) {
   return await TestServiceModel.create(data);
 }
 
-export async function updateTestService(id, data) {
+export async function updateTestService( data) {
+     
   const [updatedCount] = await TestServiceModel.update(data, {
-    where: { id }
+    where: { id :data.id }
   });
+   
 
   if (updatedCount === 0) {
     return null; // not found
   }
 
-  return await TestServiceModel.findByPk(id);
+  return await TestServiceModel.findByPk(data.id);
 }
 
 export async function deleteTestService(id) {

@@ -141,7 +141,7 @@ const onSubmit = () => {
       title: title.value,
       appName: appName.value,
       serviceName: serviceName.value,
-      input: "{}"
+      input: input.value
     }
   }).then((data) => {
     console.log(data);
