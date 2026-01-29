@@ -70,6 +70,30 @@
             <q-item-label>Test Services</q-item-label>
           </q-item-section>
         </q-item>
+        <q-item clickable to="/userDetails">
+          <q-item-section avatar>
+            <q-icon name="person" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>User</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable to="/teamDetails">
+          <q-item-section avatar>
+            <q-icon name="group" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Team</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable to="/groupDetails">
+          <q-item-section avatar>
+            <q-icon name="group" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Group</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 

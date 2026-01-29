@@ -158,3 +158,34 @@ app.post("/api/executeService", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+
+app.post("/api/getUserInfo", async (req, res) => {
+  try {
+    const { account, userName } = req.body;
+    const result = await bawService.getUserInfo(account, userName);
+    res.status(200).type("application/json").send(result);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+app.post("/api/getTeamInfo", async (req, res) => {
+  try {
+    const { account, teamName,snapshotId } = req.body;
+    const result = await bawService.getTeamInfo(account, teamName,snapshotId);
+    res.status(200).type("application/json").send(result);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+app.post("/api/getGroupInfo", async (req, res) => {
+  try {
+    const { account, groupName } = req.body;
+    const result = await bawService.getGroupInfo(account, groupName);
+    res.status(200).type("application/json").send(result);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});

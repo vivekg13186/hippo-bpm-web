@@ -124,3 +124,55 @@ export async function getApps(account) {
 
   return response.data;
 }
+
+export async function getUserInfo(account, username) {
+  const config = getAxiosConfig(account);
+
+  const payload = {
+    userName: username,
+    includeInternalMemberships: "false",
+    refreshUser: "false",
+    includeEditableUserPreferences: "false",
+    parts: "all|memberships",
+  };
+
+  const response = await axios.get(`${account.url}/rest/bpm/wle/v1/user`, {
+    ...config,
+    params: payload,
+  });
+
+  return response.data;
+}
+
+export async function getTeamInfo(account, teamName, snapshotId) {
+  const config = getAxiosConfig(account);
+
+  const payload = {
+    name: teamName,
+    snapshotId: snapshotId,
+  };
+
+  const response = await axios.get(`${account.url}/rest/bpm/wle/v1/team`, {
+    ...config,
+    params: payload,
+  });
+  return response.data;
+}
+
+export async function getGroupInfo(account, groupName) {
+  const config = getAxiosConfig(account);
+
+  const payload = {
+    includeDeleted: "false",
+    parts: "all",
+  };
+
+  const response = await axios.get(
+    `${account.url}/rest/bpm/wle/v1/group/${groupName}`,
+    {
+      ...config,
+      params: payload,
+    },
+  );
+  return response.data;
+}

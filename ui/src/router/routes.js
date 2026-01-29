@@ -10,6 +10,9 @@ const routes = [
       { path: '/instanceViewer', component: () => import('pages/InstanceViewer.vue') },
       { path: '/testService', component: () => import('pages/TestService.vue') },
       { path: '/runService/:id', component: () => import('pages/RunService.vue') },
+      { path: '/userDetails', component: () => import('pages/UserDetails.vue') },
+      { path: '/teamDetails', component: () => import('pages/TeamDetails.vue') },
+      { path: '/groupDetails', component: () => import('pages/GroupDetails.vue') },
     ],
   },
 
