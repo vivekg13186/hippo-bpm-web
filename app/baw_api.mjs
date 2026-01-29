@@ -1,9 +1,30 @@
 import axios from "axios";
 import https from "https";
- 
+
+function axiosErrorResponse(error) {
+  console.error(error);
+  if (error.response) {
+    return {
+      message: error.response.data,
+      status: error.response.status,
+      headers: error.response.headers,
+    };
+  } else if (error.request) {
+    return {
+      message: "error in request check log",
+    };
+  } else {
+    return {
+      message: error.message,
+    };
+  }
+  return {
+    message: error.config,
+  };
+}
 
 const httpsAgent = new https.Agent({
-  rejectUnauthorized: false
+  rejectUnauthorized: false,
 });
 
 function getAxiosConfig(account) {
@@ -12,11 +33,11 @@ function getAxiosConfig(account) {
     const code = Buffer.from(base).toString("base64");
 
     return {
-        httpsAgent,
+      httpsAgent,
       headers: {
-        "Authorization": `ZenApiKey ${code}`,
-        "Accept": "application/json"
-      }
+        Authorization: `ZenApiKey ${code}`,
+        Accept: "application/json",
+      },
     };
   }
 
@@ -24,11 +45,11 @@ function getAxiosConfig(account) {
     httpsAgent,
     auth: {
       username: account.username,
-      password: account.password
+      password: account.password,
     },
     headers: {
-      "Accept": "application/json"
-    }
+      Accept: "application/json",
+    },
   };
 }
 export async function getToolkits(account) {
@@ -42,19 +63,14 @@ export async function getToolkits(account) {
 export async function getInstance(account, instanceId) {
   const config = getAxiosConfig(account);
   const url = `${account.url}/rest/bpm/wle/v1/process/${instanceId}`;
-  
-    const response = await axios.get(
-      url,
-      {
-        ...config,
-        params: {
-          parts: "all"
-        }
-      }
-    );
-    return response.data;
 
- 
+  const response = await axios.get(url, {
+    ...config,
+    params: {
+      parts: "all",
+    },
+  });
+  return response.data;
 }
 
 export async function executeService(account, testServiceModel) {
@@ -64,20 +80,25 @@ export async function executeService(account, testServiceModel) {
     action: "start",
     createTask: "false",
     parts: "all",
-    params: testServiceModel.input
+    params: testServiceModel.input,
   };
-  
-   
-  const response = await axios.post(
-    `${account.url}/rest/bpm/wle/v1/service/${testServiceModel.appName}@${testServiceModel.serviceName}`,null,{
-      ...config,
-      params: payload
-    }
-  );
 
-  return response.data;
+  try {
+    const response = await axios.post(
+      `${account.url}/rest/bpm/wle/v1/service/${testServiceModel.appName}@${testServiceModel.serviceName}`,
+      null,
+      {
+        ...config,
+        params: payload,
+      },
+    );
+
+    return response.data;
+  } catch (e) {
+    return axiosErrorResponse(e);
+  }
 }
-export async function getSnapshotInfo(account,snapshotId) {
+export async function getSnapshotInfo(account, snapshotId) {
   const config = getAxiosConfig(account);
 
   const response = await axios.get(
@@ -86,12 +107,11 @@ export async function getSnapshotInfo(account,snapshotId) {
       ...config,
       params: {
         snapshotId: snapshotId,
-        recurse: "true"
-      }
-    }
+        recurse: "true",
+      },
+    },
   );
 
-  
   return response.data;
 }
 export async function getApps(account) {
@@ -99,7 +119,7 @@ export async function getApps(account) {
 
   const response = await axios.get(
     `${account.url}/rest/bpm/wle/v1/processApps`,
-    config
+    config,
   );
 
   return response.data;

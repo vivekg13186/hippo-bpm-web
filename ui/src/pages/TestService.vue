@@ -1,6 +1,7 @@
 <template>
+  <q-ajax-bar ref="bar" position="top" size="10px" skip-hijack />
   <q-page class="q-pa-md q-gutter-md">
-    <q-ajax-bar ref="bar" position="top" size="10px" skip-hijack />
+
     <div class="q-pb-md q-gutter-sm">
       <q-breadcrumbs>
         <q-breadcrumbs-el label="Home" to="/" />
@@ -8,12 +9,14 @@
       </q-breadcrumbs>
     </div>
     <PanelSection title="Import Test Service">
+       <q-btn color="primary" dense outline icon="code"  rounded size="sm"  @click="formatJson"/>
+
       <CodeEditor :languages="[['json']]" v-model="input" theme="a11y-light" font-size="12px" :line-nums="true"
         style="width: 100%;">
       </CodeEditor>
       <br />
       <div class="q-gutter-md">
-        <q-btn type="format" label="format" unelevated color="primary" @click="formatJson"></q-btn>
+
         <q-btn type="import" label="import" unelevated color="primary" @click="importTest"></q-btn>
       </div>
 

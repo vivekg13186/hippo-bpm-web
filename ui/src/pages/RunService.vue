@@ -17,14 +17,40 @@
         <q-btn color="primary" unelevated @click="saveService">Save</q-btn>
       </div>
     </PanelSection>
-    <PanelSection title="Input JSON">
-      <CodeEditor :languages="[['json']]" v-model="input" theme="a11y-light" font-size="12px" :line-nums="true" style="width: 100%;">
-      </CodeEditor>
-    </PanelSection>
-    <PanelSection title="Output JSON">
-      <CodeEditor :languages="[['json']]" v-model="output" theme="a11y-light" font-size="12px" :line-nums="true" style="width: 100%;">
-      </CodeEditor>
-    </PanelSection>
+
+
+
+    <q-splitter v-model="splitterModel" style="height: 400px">
+
+      <template v-slot:before>
+        <div class="q-pa-md">
+
+
+
+          <div class="text-h6 q-mb-xs">Input</div>
+ <q-btn color="primary" dense outline icon="code"  rounded size="sm"  @click="formatInput"/>
+
+          <CodeEditor :languages="[['json']]" v-model="input" theme="a11y-light" font-size="12px" :line-nums="true"
+            style="width: 100%;">
+          </CodeEditor>
+        </div>
+      </template>
+
+      <template v-slot:after>
+        <div class="q-pa-md">
+          <div class="text-h6 q-mb-xs">Output</div>
+
+            <q-btn color="primary" dense outline icon="code"  rounded size="sm"  @click="formatOutput"/>
+
+          <CodeEditor :languages="[['json']]" v-model="output" theme="a11y-light" font-size="12px" :line-nums="true"
+            style="width: 100%;">
+          </CodeEditor>
+        </div>
+      </template>
+
+    </q-splitter>
+
+
   </q-page>
 
 </template>
@@ -36,7 +62,7 @@ import CodeEditor from "simple-code-editor";
 import PanelSection from "src/components/PanelSection.vue";
 import axios from 'axios';
 import { useQuasar } from 'quasar'
-
+const splitterModel = ref(50);
 const $q = useQuasar();
 const options = ref([])
 const bar = ref(null)
@@ -63,6 +89,26 @@ const loadEnvs = () => {
     bar.value.stop();
   })
 }
+const formatInput = () => {
+  try {
+    var json = JSON.parse(input.value);
+    input.value = JSON.stringify(json, null, 2);
+  } catch (e) {
+    console.error(e);
+    $q.notify("Invalid JSON");
+    return;
+  }
+}
+const formatOutput = () => {
+  try {
+    var json = JSON.parse(output.value);
+    output.value = JSON.stringify(json, null, 2);
+  } catch (e) {
+    console.error(e);
+    $q.notify("Invalid JSON");
+    return;
+  }
+}
 const loadTestService = (id) => {
   bar.value.start();
   axios(
@@ -88,6 +134,10 @@ onMounted(() => {
   loadTestService($route.params.id);
 })
 const runService = () => {
+  if (!env.value) {
+    $q.notify("Select a env");
+    return;
+  }
   bar.value.start();
   axios({
     method: "POST",

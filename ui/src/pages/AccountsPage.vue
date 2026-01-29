@@ -1,6 +1,7 @@
 <template>
+   <q-ajax-bar ref="bar" position="top" size="10px" skip-hijack />
   <q-page class="q-pa-md q-gutter-md">
-    <q-ajax-bar ref="bar" position="top" size="10px" skip-hijack />
+
     <div class="q-pb-md q-gutter-sm">
       <q-breadcrumbs>
         <q-breadcrumbs-el label="Home" to="/" />

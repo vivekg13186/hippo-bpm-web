@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header flat>
+    <q-header elevated>
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
@@ -21,7 +21,7 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item class="bg-primary text-white">
+        <q-item  elevated class="bg-primary text-white">
           <q-item-section avatar>
             <img src="/hippo-light.png" style="height: 30px;width: 30px;">
           </q-item-section>
